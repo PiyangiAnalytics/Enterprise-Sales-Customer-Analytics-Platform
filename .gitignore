@@ -1,0 +1,25 @@
+# SQL Server
+*.bak
+*.mdf
+*.ldf
+*.ndf
+
+# Python
+__pycache__/
+*.pyc
+.ipynb_checkpoints/
+.venv/
+venv/
+
+# Fabric / notebooks
+.fabric/
+
+# Secrets / local config
+*.env
+local.settings.json
+*credentials*.json
+
+# OS / editor
+.DS_Store
+Thumbs.db
+.vscode/
