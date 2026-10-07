@@ -1,0 +1,22 @@
+ALTER TABLE Sales.SalesOrderHeader ADD CreatedDate datetime NOT NULL DEFAULT GETDATE();
+ALTER TABLE Sales.SalesOrderHeader ADD IsDeleted bit NOT NULL DEFAULT 0;
+ALTER TABLE Sales.SalesOrderDetail ADD CreatedDate datetime NOT NULL DEFAULT GETDATE();
+ALTER TABLE Sales.SalesOrderDetail ADD IsDeleted bit NOT NULL DEFAULT 0;
+ALTER TABLE Production.Product ADD CreatedDate datetime NOT NULL DEFAULT GETDATE();
+ALTER TABLE Production.Product ADD IsDeleted bit NOT NULL DEFAULT 0;
+ALTER TABLE Production.ProductCategory ADD CreatedDate datetime NOT NULL DEFAULT GETDATE();
+ALTER TABLE Production.ProductCategory ADD IsDeleted bit NOT NULL DEFAULT 0;
+ALTER TABLE Production.ProductSubCategory ADD CreatedDate datetime NOT NULL DEFAULT GETDATE();
+ALTER TABLE Production.ProductSubCategory ADD IsDeleted bit NOT NULL DEFAULT 0;
+ALTER TABLE Production.ProductInventory ADD CreatedDate datetime NOT NULL DEFAULT GETDATE();
+ALTER TABLE Production.ProductInventory ADD IsDeleted bit NOT NULL DEFAULT 0;
+ALTER TABLE Purchasing.Vendor ADD CreatedDate datetime NOT NULL DEFAULT GETDATE();
+ALTER TABLE Purchasing.Vendor ADD IsDeleted bit NOT NULL DEFAULT 0;
+ALTER TABLE Purchasing.PurchaseOrderHeader ADD CreatedDate datetime NOT NULL DEFAULT GETDATE();
+ALTER TABLE Purchasing.PurchaseOrderHeader ADD IsDeleted bit NOT NULL DEFAULT 0;
+ALTER TABLE Purchasing.PurchaseOrderDetail ADD CreatedDate datetime NOT NULL DEFAULT GETDATE();
+ALTER TABLE Purchasing.PurchaseOrderDetail ADD IsDeleted bit NOT NULL DEFAULT 0;
+
+ALTER TABLE Purchasing.PurchaseOrderDetail ADD rowguid uniqueidentifier NOT NULL DEFAULT NEWID();
+ALTER TABLE Purchasing.PurchaseOrderHeader ADD rowguid uniqueidentifier NOT NULL DEFAULT NEWID();
+ALTER TABLE Purchasing.Vendor ADD rowguid uniqueidentifier NOT NULL DEFAULT NEWID();
