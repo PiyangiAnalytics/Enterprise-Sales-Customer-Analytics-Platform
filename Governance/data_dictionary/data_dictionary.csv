@@ -1,0 +1,120 @@
+Table,Field,Definition,Owner,Classification,Quality Rule
+erp.SalesOrder,SalesOrderID,Unique sales order identifier,ERP,Internal,Cannot be NULL; unique
+erp.SalesOrder,CustomerID,Customer who placed the order (FK to CRM Customer),ERP,Internal,Must exist in Customer
+erp.SalesOrder,OrderDate,Date the order was placed,ERP,Internal,Cannot be NULL
+erp.SalesOrder,Revenue,Total order value (from TotalDue),Finance,Internal,>= 0
+erp.SalesOrder,ModifiedDate,Last updated timestamp,ERP,Internal,Cannot be NULL
+erp.SalesOrder,CreatedDate,Row creation timestamp,ERP,Internal,Cannot be NULL
+erp.SalesOrder,IsDeleted,Soft-delete flag,ERP,Internal,0 or 1 only
+erp.SalesOrderLine,SalesOrderDetailID,Unique line-item identifier,ERP,Internal,Cannot be NULL; unique
+erp.SalesOrderLine,SalesOrderID,Parent order (FK to SalesOrder),ERP,Internal,Must exist in SalesOrder
+erp.SalesOrderLine,ProductID,Product sold on this line (FK to Product),ERP,Internal,Must exist in Product
+erp.SalesOrderLine,Quantity,Units ordered on this line,ERP,Internal,> 0
+erp.SalesOrderLine,UnitPrice,Price per unit at time of sale,Finance,Internal,>= 0
+erp.SalesOrderLine,Discount,Per-unit discount applied,Finance,Internal,Between 0 and 1
+erp.SalesOrderLine,LineRevenue,"Extended line total (qty x price, net of discount)",Finance,Internal,>= 0
+erp.SalesOrderLine,ModifiedDate,Last updated timestamp,ERP,Internal,Cannot be NULL
+erp.SalesOrderLine,CreatedDate,Row creation timestamp,ERP,Internal,Cannot be NULL
+erp.SalesOrderLine,IsDeleted,Soft-delete flag,ERP,Internal,0 or 1 only
+erp.Product,ProductID,Unique product identifier,ERP,Internal,Cannot be NULL; unique
+erp.Product,ProductName,Product display name,ERP,Internal,Cannot be NULL
+erp.Product,ProductNumber,Product SKU/code,ERP,Internal,Cannot be NULL; unique
+erp.Product,ProductSubcategoryID,Subcategory the product belongs to (FK to ProductCategory),ERP,Internal,"May be NULL (uncategorized); if present, must exist in ProductCategory"
+erp.Product,StandardCost,Internal cost to produce/acquire,Finance,Confidential,>= 0
+erp.Product,ListPrice,Published selling price,Finance,Internal,>= 0
+erp.Product,Color,Product color attribute,ERP,Internal,May be NULL
+erp.Product,SellStartDate,Date the product became sellable,ERP,Internal,Cannot be NULL
+erp.Product,SellEndDate,Date the product stopped being sellable,ERP,Internal,May be NULL (still active)
+erp.Product,DiscontinuedDate,Date the product was discontinued,ERP,Internal,May be NULL (not discontinued)
+erp.Product,ModifiedDate,Last updated timestamp,ERP,Internal,Cannot be NULL
+erp.Product,CreatedDate,Row creation timestamp,ERP,Internal,Cannot be NULL
+erp.Product,IsDeleted,Soft-delete flag,ERP,Internal,0 or 1 only
+erp.ProductCategory,ProductSubcategoryID,Unique subcategory identifier,ERP,Internal,Cannot be NULL; unique
+erp.ProductCategory,SubcategoryName,Subcategory display name,ERP,Internal,Cannot be NULL
+erp.ProductCategory,ProductCategoryID,Parent top-level category identifier,ERP,Internal,Must exist
+erp.ProductCategory,CategoryName,Top-level category display name,ERP,Internal,Cannot be NULL
+erp.ProductCategory,ModifiedDate,Last updated timestamp,ERP,Internal,Cannot be NULL
+erp.ProductCategory,CreatedDate,Row creation timestamp,ERP,Internal,Cannot be NULL
+erp.ProductCategory,IsDeleted,Soft-delete flag,ERP,Internal,0 or 1 only
+erp.Inventory,ProductID,Product being stocked (FK to Product),ERP,Internal,Must exist in Product
+erp.Inventory,LocationID,Warehouse/location identifier,ERP,Internal,Cannot be NULL
+erp.Inventory,Shelf,Shelf location code,ERP,Internal,May be NULL
+erp.Inventory,Bin,Bin location code,ERP,Internal,May be NULL
+erp.Inventory,QuantityOnHand,Units currently in stock,ERP,Internal,>= 0
+erp.Inventory,ModifiedDate,Last updated timestamp,ERP,Internal,Cannot be NULL
+erp.Inventory,CreatedDate,Row creation timestamp,ERP,Internal,Cannot be NULL
+erp.Inventory,IsDeleted,Soft-delete flag,ERP,Internal,0 or 1 only
+erp.Supplier,SupplierID,Unique supplier identifier,ERP,Internal,Cannot be NULL; unique
+erp.Supplier,SupplierName,Supplier/vendor display name,ERP,Internal,Cannot be NULL
+erp.Supplier,AccountNumber,Supplier account reference code,ERP,Confidential,Cannot be NULL
+erp.Supplier,CreditRating,Internal credit rating of the supplier,Finance,Confidential,Between 1 and 5
+erp.Supplier,PreferredVendorStatus,Whether this is a preferred vendor,ERP,Internal,0 or 1 only
+erp.Supplier,ActiveFlag,Whether the supplier is currently active,ERP,Internal,0 or 1 only
+erp.Supplier,ModifiedDate,Last updated timestamp,ERP,Internal,Cannot be NULL
+erp.Supplier,CreatedDate,Row creation timestamp,ERP,Internal,Cannot be NULL
+erp.Supplier,IsDeleted,Soft-delete flag,ERP,Internal,0 or 1 only
+erp.PurchaseOrder,PurchaseOrderID,Unique purchase order identifier,ERP,Internal,Cannot be NULL
+erp.PurchaseOrder,PurchaseOrderDetailID,Unique PO line-item identifier,ERP,Internal,Cannot be NULL; unique
+erp.PurchaseOrder,SupplierID,Vendor the PO was placed with (FK to Supplier),ERP,Internal,Must exist in Supplier
+erp.PurchaseOrder,EmployeeID,Employee who raised the PO,ERP,Internal,Cannot be NULL
+erp.PurchaseOrder,Status,PO lifecycle status code,ERP,Internal,Must be a valid AdventureWorks status code (1-4)
+erp.PurchaseOrder,OrderDate,Date the PO was placed,ERP,Internal,Cannot be NULL
+erp.PurchaseOrder,ShipDate,Date the order shipped from the supplier,ERP,Internal,"May be NULL (not yet shipped); if present, >= OrderDate"
+erp.PurchaseOrder,ProductID,Product on this PO line (FK to Product),ERP,Internal,Must exist in Product
+erp.PurchaseOrder,Quantity,Units ordered on this line,ERP,Internal,> 0
+erp.PurchaseOrder,UnitPrice,Agreed price per unit,Finance,Internal,>= 0
+erp.PurchaseOrder,Amount,Extended line total (qty x unit price),Finance,Internal,>= 0
+erp.PurchaseOrder,ModifiedDate,Last updated timestamp,ERP,Internal,Cannot be NULL
+erp.PurchaseOrder,CreatedDate,Row creation timestamp,ERP,Internal,Cannot be NULL
+erp.PurchaseOrder,IsDeleted,Soft-delete flag,ERP,Internal,0 or 1 only
+SalesRepresentative,RepID,Unique sales rep identifier,CRM,Internal,Cannot be NULL; unique
+SalesRepresentative,FirstName,Rep's first name,CRM,Confidential,Cannot be NULL
+SalesRepresentative,LastName,Rep's last name,CRM,Confidential,Cannot be NULL
+SalesRepresentative,Region,Sales region the rep covers,CRM,Internal,Cannot be NULL
+SalesRepresentative,HireDate,Date the rep was hired,CRM,Confidential,Cannot be NULL
+SalesRepresentative,CreatedDate,Row creation timestamp,CRM,Internal,Cannot be NULL
+SalesRepresentative,ModifiedDate,Last updated timestamp,CRM,Internal,Cannot be NULL
+SalesRepresentative,IsDeleted,Soft-delete flag,CRM,Internal,0 or 1 only
+Customer,CustomerID,"Unique customer identifier, shared with ERP's customer ID space",CRM,Internal,Cannot be NULL
+Customer,FirstName,Customer's first name,CRM,Confidential,Cannot be NULL
+Customer,LastName,Customer's last name,CRM,Confidential,Cannot be NULL
+Customer,Email,Customer email address,CRM,Confidential,Valid email format; should not be NULL (known defect: ~1% planted missing)
+Customer,Phone,Customer phone number,CRM,Confidential,May be NULL
+Customer,Region,Customer's region,CRM,Internal,May be NULL
+Customer,CreatedDate,Row creation timestamp,CRM,Internal,Cannot be NULL
+Customer,ModifiedDate,Last updated timestamp,CRM,Internal,Cannot be NULL
+Customer,IsDeleted,Soft-delete flag,CRM,Internal,0 or 1 only
+Campaign,CampaignID,Unique campaign identifier,CRM,Internal,Cannot be NULL; unique
+Campaign,CampaignName,Campaign display name,CRM,Internal,Cannot be NULL
+Campaign,Channel,Marketing channel used,CRM,Internal,Cannot be NULL
+Campaign,StartDate,Campaign start date,CRM,Internal,Cannot be NULL
+Campaign,EndDate,Campaign end date,CRM,Internal,"May be NULL (ongoing); if present, >= StartDate"
+Campaign,Budget,Planned campaign spend,Finance,Confidential,>= 0; may be NULL
+Campaign,CreatedDate,Row creation timestamp,CRM,Internal,Cannot be NULL
+Campaign,ModifiedDate,Last updated timestamp,CRM,Internal,Cannot be NULL
+Campaign,IsDeleted,Soft-delete flag,CRM,Internal,0 or 1 only
+Lead,LeadID,Unique lead identifier,CRM,Internal,Cannot be NULL; unique
+Lead,CampaignID,Campaign that generated this lead (FK to Campaign),CRM,Internal,"May be NULL (no campaign attribution); if present, must exist in Campaign"
+Lead,LeadSource,How the lead was acquired,CRM,Internal,Cannot be NULL
+Lead,Status,Lead's current pipeline status,CRM,Internal,"One of New, Contacted, Qualified, Disqualified, Converted"
+Lead,CreatedDate,Row creation timestamp,CRM,Internal,Cannot be NULL
+Lead,ModifiedDate,Last updated timestamp,CRM,Internal,Cannot be NULL
+Lead,IsDeleted,Soft-delete flag,CRM,Internal,0 or 1 only
+Opportunity,OpportunityID,Unique opportunity identifier,CRM,Internal,Cannot be NULL; unique
+Opportunity,CustomerID,Customer this opportunity is for (FK to Customer),CRM,Internal,"Must exist in Customer (known exception: 5 planted orphaned rows, see planted_defects.csv)"
+Opportunity,RepID,Sales rep assigned to this opportunity (FK to SalesRepresentative),CRM,Internal,Must exist in SalesRepresentative
+Opportunity,Stage,Opportunity's pipeline stage,CRM,Internal,"One of Open, Qualifying, Proposal, Negotiation, Closed Won, Closed Lost"
+Opportunity,EstimatedValue,Projected deal value,Finance,Confidential,>= 0
+Opportunity,CloseDate,Date the opportunity closed (won or lost),CRM,Internal,"May be NULL (still open); if present, should be >= CreatedDate (known exception: 8 planted impossible-date rows)"
+Opportunity,CreatedDate,Row creation timestamp,CRM,Internal,Cannot be NULL
+Opportunity,ModifiedDate,Last updated timestamp,CRM,Internal,Cannot be NULL
+Opportunity,IsDeleted,Soft-delete flag,CRM,Internal,0 or 1 only
+CustomerInteraction,InteractionID,Unique interaction identifier,CRM,Internal,Cannot be NULL; unique
+CustomerInteraction,CustomerID,Customer involved in the interaction (FK to Customer),CRM,Internal,Must exist in Customer
+CustomerInteraction,RepID,Rep who handled the interaction (FK to SalesRepresentative),CRM,Internal,"May be NULL (unassigned/self-service); if present, must exist in SalesRepresentative"
+CustomerInteraction,InteractionType,"Type of interaction (Call, Email, Meeting, Support Ticket, Demo)",CRM,Internal,Cannot be NULL
+CustomerInteraction,InteractionDate,Date/time the interaction occurred,CRM,Internal,Cannot be NULL
+CustomerInteraction,Notes,Free-text notes about the interaction,CRM,Confidential,May be NULL; free text -- review periodically for inadvertent PII
+CustomerInteraction,CreatedDate,Row creation timestamp,CRM,Internal,Cannot be NULL
+CustomerInteraction,ModifiedDate,Last updated timestamp,CRM,Internal,Cannot be NULL
+CustomerInteraction,IsDeleted,Soft-delete flag,CRM,Internal,0 or 1 only
